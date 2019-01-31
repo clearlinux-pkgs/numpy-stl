@@ -6,7 +6,7 @@
 #
 Name     : numpy-stl
 Version  : 2.9.0
-Release  : 1
+Release  : 2
 URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.9.0/numpy-stl-v2.9.0.tar.xz
 Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.9.0/numpy-stl-v2.9.0.tar.xz
 Source99 : https://github.com/WoLpH/numpy-stl/releases/download/v2.9.0/numpy-stl-v2.9.0.tar.xz.asc
@@ -17,19 +17,8 @@ Requires: numpy-stl-bin = %{version}-%{release}
 Requires: numpy-stl-license = %{version}-%{release}
 Requires: numpy-stl-python = %{version}-%{release}
 Requires: numpy-stl-python3 = %{version}-%{release}
-Requires: Sphinx
-Requires: cov-core
-Requires: coverage
-Requires: docutils
 Requires: execnet
-Requires: flake8
 Requires: numpy
-Requires: pep8
-Requires: py
-Requires: pyflakes
-Requires: pytest
-Requires: pytest-cov
-Requires: python-mock
 Requires: python-utils
 BuildRequires : buildreq-distutils3
 BuildRequires : numpy
@@ -88,12 +77,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1548373270
+export SOURCE_DATE_EPOCH=1548976173
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
 %install
-export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/numpy-stl
 cp LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/LICENSE

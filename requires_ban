@@ -1,2 +1,13 @@
 # This file contains runtime requirements that get picked up but are
 # undesirable. One entry per line, no whitespace.
+pep8
+py
+pyflakes
+pytest
+pytest-cov
+python-mock
+flake8
+coverage
+cov-core
+Sphinx
+docutils
