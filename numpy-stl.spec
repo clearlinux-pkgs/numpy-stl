@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xE81444E9CE1F695D (wolph@wol.ph)
 #
 Name     : numpy-stl
-Version  : 2.9.0
-Release  : 2
-URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.9.0/numpy-stl-v2.9.0.tar.xz
-Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.9.0/numpy-stl-v2.9.0.tar.xz
-Source99 : https://github.com/WoLpH/numpy-stl/releases/download/v2.9.0/numpy-stl-v2.9.0.tar.xz.asc
+Version  : 2.10.0
+Release  : 3
+URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.0/numpy-stl-v2.10.0.tar.xz
+Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.0/numpy-stl-v2.10.0.tar.xz
+Source99 : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.0/numpy-stl-v2.10.0.tar.xz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -70,14 +70,14 @@ python3 components for the numpy-stl package.
 
 
 %prep
-%setup -q -n numpy-stl-v2.9.0
+%setup -q -n numpy-stl-v2.10.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1548976173
+export SOURCE_DATE_EPOCH=1550421865
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
