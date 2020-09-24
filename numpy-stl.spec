@@ -6,7 +6,7 @@
 #
 Name     : numpy-stl
 Version  : 2.10.1
-Release  : 10
+Release  : 11
 URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.1/numpy-stl-v2.10.1.tar.xz
 Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.1/numpy-stl-v2.10.1.tar.xz
 Source1  : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.1/numpy-stl-v2.10.1.tar.xz.asc
