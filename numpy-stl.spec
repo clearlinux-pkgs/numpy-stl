@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xE81444E9CE1F695D (wolph@wol.ph)
 #
 Name     : numpy-stl
-Version  : 2.10.1
-Release  : 11
-URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.1/numpy-stl-v2.10.1.tar.xz
-Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.1/numpy-stl-v2.10.1.tar.xz
-Source1  : https://github.com/WoLpH/numpy-stl/releases/download/v2.10.1/numpy-stl-v2.10.1.tar.xz.asc
+Version  : 2.11.3
+Release  : 12
+URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.11.3/numpy-stl-v2.11.3.tar.xz
+Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.11.3/numpy-stl-v2.11.3.tar.xz
+Source1  : https://github.com/WoLpH/numpy-stl/releases/download/v2.11.3/numpy-stl-v2.11.3.tar.xz.asc
 Summary  : Library to make reading, writing and modifying both binary and ascii STL files easy.
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -19,15 +19,10 @@ Requires: numpy-stl-python = %{version}-%{release}
 Requires: numpy-stl-python3 = %{version}-%{release}
 Requires: numpy
 Requires: python-utils
+BuildRequires : Cython
 BuildRequires : buildreq-distutils3
 BuildRequires : numpy
-BuildRequires : pluggy
-BuildRequires : py-python
-BuildRequires : pytest
-BuildRequires : pytest-runner
 BuildRequires : python-utils
-BuildRequires : tox
-BuildRequires : virtualenv
 
 %description
 numpy-stl
@@ -72,19 +67,19 @@ python3 components for the numpy-stl package.
 
 
 %prep
-%setup -q -n numpy-stl-v2.10.1
-cd %{_builddir}/numpy-stl-v2.10.1
+%setup -q -n numpy-stl-v2.11.3
+cd %{_builddir}/numpy-stl-v2.11.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583537968
+export SOURCE_DATE_EPOCH=1602777812
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
@@ -93,8 +88,8 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/numpy-stl
-cp %{_builddir}/numpy-stl-v2.10.1/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/7f2ba3d85548b142cdd896317a0a190793940c1f
-cp %{_builddir}/numpy-stl-v2.10.1/docs/_theme/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/3d1c6f6ce9ac9fdbae7bdc2b4d63940561f79edd
+cp %{_builddir}/numpy-stl-v2.11.3/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/7f2ba3d85548b142cdd896317a0a190793940c1f
+cp %{_builddir}/numpy-stl-v2.11.3/docs/_theme/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/3d1c6f6ce9ac9fdbae7bdc2b4d63940561f79edd
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
