@@ -6,7 +6,7 @@
 #
 Name     : numpy-stl
 Version  : 2.16.3
-Release  : 33
+Release  : 34
 URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.16.3/numpy-stl-v2.16.3.tar.xz
 Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.16.3/numpy-stl-v2.16.3.tar.xz
 Source1  : https://github.com/WoLpH/numpy-stl/releases/download/v2.16.3/numpy-stl-v2.16.3.tar.xz.asc
@@ -17,12 +17,10 @@ Requires: numpy-stl-bin = %{version}-%{release}
 Requires: numpy-stl-license = %{version}-%{release}
 Requires: numpy-stl-python = %{version}-%{release}
 Requires: numpy-stl-python3 = %{version}-%{release}
-Requires: numpy
-Requires: python-utils
-BuildRequires : Cython
 BuildRequires : buildreq-distutils3
-BuildRequires : numpy
-BuildRequires : python-utils
+BuildRequires : pypi(numpy)
+BuildRequires : pypi(python_utils)
+BuildRequires : pypi-cython
 
 %description
 numpy-stl
@@ -75,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1635779112
+export SOURCE_DATE_EPOCH=1642360491
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
