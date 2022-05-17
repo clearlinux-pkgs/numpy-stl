@@ -6,10 +6,10 @@
 #
 Name     : numpy-stl
 Version  : 2.17.1
-Release  : 35
-URL      : https://github.com/WoLpH/numpy-stl/releases/download/v2.17.1/numpy-stl-2.17.1.tar.gz
-Source0  : https://github.com/WoLpH/numpy-stl/releases/download/v2.17.1/numpy-stl-2.17.1.tar.gz
-Source1  : https://github.com/WoLpH/numpy-stl/releases/download/v2.17.1/numpy-stl-2.17.1.tar.gz.asc
+Release  : 36
+URL      : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz
+Source1  : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz.asc
 Summary  : Library to make reading, writing and modifying both binary and ascii STL files easy.
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -73,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1652680743
+export SOURCE_DATE_EPOCH=1652807098
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
