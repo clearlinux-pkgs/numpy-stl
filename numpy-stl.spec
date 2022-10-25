@@ -6,7 +6,7 @@
 #
 Name     : numpy-stl
 Version  : 2.17.1
-Release  : 36
+Release  : 37
 URL      : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz
 Source1  : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz.asc
