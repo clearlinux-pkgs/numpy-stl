@@ -5,15 +5,17 @@
 # Source0 file verified with key 0xE81444E9CE1F695D (wolph@wol.ph)
 #
 Name     : numpy-stl
-Version  : 2.17.1
-Release  : 37
-URL      : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz
-Source1  : https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz.asc
+Version  : 3.0.0
+Release  : 38
+URL      : https://files.pythonhosted.org/packages/29/79/3b75898b8c3b926f5c1c26722b3211cbad0be2e309952c8a6ce3410fdac0/numpy-stl-3.0.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/29/79/3b75898b8c3b926f5c1c26722b3211cbad0be2e309952c8a6ce3410fdac0/numpy-stl-3.0.0.tar.gz
+Source1  : https://files.pythonhosted.org/packages/29/79/3b75898b8c3b926f5c1c26722b3211cbad0be2e309952c8a6ce3410fdac0/numpy-stl-3.0.0.tar.gz.asc
 Summary  : Library to make reading, writing and modifying both binary and ascii STL files easy.
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: numpy-stl-bin = %{version}-%{release}
+Requires: numpy-stl-filemap = %{version}-%{release}
+Requires: numpy-stl-lib = %{version}-%{release}
 Requires: numpy-stl-license = %{version}-%{release}
 Requires: numpy-stl-python = %{version}-%{release}
 Requires: numpy-stl-python3 = %{version}-%{release}
@@ -30,9 +32,28 @@ numpy-stl
 Summary: bin components for the numpy-stl package.
 Group: Binaries
 Requires: numpy-stl-license = %{version}-%{release}
+Requires: numpy-stl-filemap = %{version}-%{release}
 
 %description bin
 bin components for the numpy-stl package.
+
+
+%package filemap
+Summary: filemap components for the numpy-stl package.
+Group: Default
+
+%description filemap
+filemap components for the numpy-stl package.
+
+
+%package lib
+Summary: lib components for the numpy-stl package.
+Group: Libraries
+Requires: numpy-stl-license = %{version}-%{release}
+Requires: numpy-stl-filemap = %{version}-%{release}
+
+%description lib
+lib components for the numpy-stl package.
 
 
 %package license
@@ -55,6 +76,7 @@ python components for the numpy-stl package.
 %package python3
 Summary: python3 components for the numpy-stl package.
 Group: Default
+Requires: numpy-stl-filemap = %{version}-%{release}
 Requires: python3-core
 Provides: pypi(numpy_stl)
 Requires: pypi(numpy)
@@ -65,15 +87,18 @@ python3 components for the numpy-stl package.
 
 
 %prep
-%setup -q -n numpy-stl-2.17.1
-cd %{_builddir}/numpy-stl-2.17.1
+%setup -q -n numpy-stl-3.0.0
+cd %{_builddir}/numpy-stl-3.0.0
+pushd ..
+cp -a numpy-stl-3.0.0 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1652807098
+export SOURCE_DATE_EPOCH=1671034723
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -82,16 +107,34 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 setup.py build
+
+popd
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/numpy-stl
-cp %{_builddir}/numpy-stl-2.17.1/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/7f2ba3d85548b142cdd896317a0a190793940c1f
-cp %{_builddir}/numpy-stl-2.17.1/docs/_theme/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/3d1c6f6ce9ac9fdbae7bdc2b4d63940561f79edd
+cp %{_builddir}/numpy-stl-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/7f2ba3d85548b142cdd896317a0a190793940c1f || :
+cp %{_builddir}/numpy-stl-%{version}/docs/_theme/LICENSE %{buildroot}/usr/share/package-licenses/numpy-stl/3d1c6f6ce9ac9fdbae7bdc2b4d63940561f79edd || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 -tt setup.py build install --root=%{buildroot}-v3
+popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -101,6 +144,14 @@ echo ----[ mark ]----
 /usr/bin/stl
 /usr/bin/stl2ascii
 /usr/bin/stl2bin
+
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-numpy-stl
+
+%files lib
+%defattr(-,root,root,-)
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)

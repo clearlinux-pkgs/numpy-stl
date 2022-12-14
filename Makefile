@@ -1,5 +1,5 @@
 PKG_NAME := numpy-stl
-URL = https://files.pythonhosted.org/packages/24/23/00e8a4576be319f13e53fa4289b0fbc1e0a4892404372647b4cd4b3c979e/numpy-stl-2.17.1.tar.gz
+URL = https://files.pythonhosted.org/packages/29/79/3b75898b8c3b926f5c1c26722b3211cbad0be2e309952c8a6ce3410fdac0/numpy-stl-3.0.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
