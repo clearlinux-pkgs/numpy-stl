@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xE81444E9CE1F695D (wolph@wol.ph)
 #
 Name     : numpy-stl
-Version  : 3.0.0
-Release  : 38
-URL      : https://files.pythonhosted.org/packages/29/79/3b75898b8c3b926f5c1c26722b3211cbad0be2e309952c8a6ce3410fdac0/numpy-stl-3.0.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/29/79/3b75898b8c3b926f5c1c26722b3211cbad0be2e309952c8a6ce3410fdac0/numpy-stl-3.0.0.tar.gz
-Source1  : https://files.pythonhosted.org/packages/29/79/3b75898b8c3b926f5c1c26722b3211cbad0be2e309952c8a6ce3410fdac0/numpy-stl-3.0.0.tar.gz.asc
+Version  : 3.0.1
+Release  : 39
+URL      : https://files.pythonhosted.org/packages/ef/90/5bfe9fbf50f01ac22ade0d62330af534ada45177877a94b9eb71ac67c33c/numpy-stl-3.0.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/ef/90/5bfe9fbf50f01ac22ade0d62330af534ada45177877a94b9eb71ac67c33c/numpy-stl-3.0.1.tar.gz
+Source1  : https://files.pythonhosted.org/packages/ef/90/5bfe9fbf50f01ac22ade0d62330af534ada45177877a94b9eb71ac67c33c/numpy-stl-3.0.1.tar.gz.asc
 Summary  : Library to make reading, writing and modifying both binary and ascii STL files easy.
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -23,6 +23,9 @@ BuildRequires : buildreq-distutils3
 BuildRequires : pypi(numpy)
 BuildRequires : pypi(python_utils)
 BuildRequires : pypi-cython
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 numpy-stl
@@ -87,10 +90,10 @@ python3 components for the numpy-stl package.
 
 
 %prep
-%setup -q -n numpy-stl-3.0.0
-cd %{_builddir}/numpy-stl-3.0.0
+%setup -q -n numpy-stl-3.0.1
+cd %{_builddir}/numpy-stl-3.0.1
 pushd ..
-cp -a numpy-stl-3.0.0 buildavx2
+cp -a numpy-stl-3.0.1 buildavx2
 popd
 
 %build
@@ -98,12 +101,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1671034723
+export SOURCE_DATE_EPOCH=1678747835
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
